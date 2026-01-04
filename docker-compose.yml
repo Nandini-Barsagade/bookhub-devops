@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: bookhub-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bookhub
+      MYSQL_USER: bookhub
+      MYSQL_PASSWORD: bookhub
+    ports:
+      - "3306:3306"
+
+  app:
+    build: .
+    container_name: bookhub-app
+    depends_on:
+      - mysql
+    ports:
+      - "8082:8082"
